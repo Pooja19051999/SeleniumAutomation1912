@@ -35,16 +35,23 @@ public class TestNGSeleniumJava101_Chrome {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--window-size=1920,1080");
 
+
+        String username = System.getenv("LT_USERNAME");
+        String accessKey = System.getenv("LT_ACCESS_KEY");
+        String gridURL = "@hub.lambdatest.com/wd/hub";
+
         HashMap<String, Object> ltOptions = new HashMap<String, Object>();
-        ltOptions.put("username", "poojagaydhani");
-        ltOptions.put("accessKey", "LT_1jzdOJEzcJ13e2sjLoSPK7H5pLmz0PQvqIB5heNuIboR2LH");
+        ltOptions.put("project", "SeleniumAutomation1912");
+        ltOptions.put("w3c", true);
+        ltOptions.put("plugin", "java-testNG");
         ltOptions.put("build", "TestNG Assignment");
-        ltOptions.put("name", "Sample Test");
+        ltOptions.put("name", "TestNG Assignment2");
         ltOptions.put("network", true);
         ltOptions.put("console", true);
         ltOptions.put("visual", true);;
+        options.setCapability("LT:Options", ltOptions);
 
-        driver = new RemoteWebDriver(new URL("http://poojagaydhani:LT_1jzdOJEzcJ13e2sjLoSPK7H5pLmz0PQvqIB5heNuIboR2LH@hub.lambdatest.com/wd/hub"), options);
+        driver = new RemoteWebDriver(new URL("http://poojagaydhani:LT_tbkX5LXDwgRxTaSpkc0Q57IWwV22UDmvRs0nei2mFYHEvqE@hub.lambdatest.com/wd/hub"), options);
 
 
         driver.get("https://www.lambdatest.com/selenium-playground/");
