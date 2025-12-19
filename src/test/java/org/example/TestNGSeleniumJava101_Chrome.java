@@ -50,7 +50,7 @@ public class TestNGSeleniumJava101_Chrome {
     @Test(priority = 0)
     public void testScenario1() throws InterruptedException {
 
-      Thread.sleep(3000);
+
         // Perform explicit wait till the title is available
         wait.until(ExpectedConditions.titleIs("Selenium Grid Online | Run Selenium Test On Cloud"));
 
