@@ -32,9 +32,11 @@ public class TestNGSeleniumJava101_Chrome {
         HashMap<String, Object> ltOptions = new HashMap<String, Object>();
         ltOptions.put("username", "poojagaydhani");
         ltOptions.put("accessKey", "LT_tbkX5LXDwgRxTaSpkc0Q57IWwV22UDmvRs0nei2mFYHEvqE");
-        ltOptions.put("project", "Untitled");
-        ltOptions.put("selenium_version", "4.0.0");
+        ltOptions.put("build", "TestNG Assignment");
+        ltOptions.put("project", "SeleniumAutomation1912");
+        ltOptions.put("name", "Assignment1");
         ltOptions.put("w3c", true);
+        ltOptions.put("plugin", "java-testNG");
         browserOptions.setCapability("LT:Options", ltOptions);
 
 
