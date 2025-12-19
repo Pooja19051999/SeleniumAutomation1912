@@ -26,32 +26,20 @@ public class TestNGSeleniumJava101_Chrome {
 
     @BeforeMethod
     public void setup() throws MalformedURLException {
-        ChromeOptions options = new ChromeOptions();
-        options.setCapability("browserName", "Chrome");
-        options.setCapability("browserVersion", "128.0");
-        options.setCapability("platformName", "Windows 10");
-        options.addArguments("--headless=new"); // Runs without a GUI
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--window-size=1920,1080");
-
-
-        String username = System.getenv("LT_USERNAME");
-        String accessKey = System.getenv("LT_ACCESS_KEY");
-        String gridURL = "@hub.lambdatest.com/wd/hub";
-
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("Windows 10");
+        browserOptions.setBrowserVersion("dev");
         HashMap<String, Object> ltOptions = new HashMap<String, Object>();
-        ltOptions.put("project", "SeleniumAutomation1912");
+        ltOptions.put("username", "poojagaydhani");
+        ltOptions.put("accessKey", "LT_tbkX5LXDwgRxTaSpkc0Q57IWwV22UDmvRs0nei2mFYHEvqE");
+        ltOptions.put("project", "Untitled");
+        ltOptions.put("selenium_version", "4.0.0");
         ltOptions.put("w3c", true);
-        ltOptions.put("plugin", "java-testNG");
-        ltOptions.put("build", "TestNG Assignment");
-        ltOptions.put("name", "TestNG Assignment2");
-        ltOptions.put("network", true);
-        ltOptions.put("console", true);
-        ltOptions.put("visual", true);;
-        options.setCapability("LT:Options", ltOptions);
+        browserOptions.setCapability("LT:Options", ltOptions);
 
-        driver = new RemoteWebDriver(new URL("http://poojagaydhani:LT_tbkX5LXDwgRxTaSpkc0Q57IWwV22UDmvRs0nei2mFYHEvqE@hub.lambdatest.com/wd/hub"), options);
+
+
+        driver = new RemoteWebDriver(new URL("http://poojagaydhani:tbkX5LXDwgRxTaSpkc0Q57IWwV22UDmvRs0nei2mFYHEvqE@hub.lambdatest.com/wd/hub"), browserOptions);
 
 
         driver.get("https://www.lambdatest.com/selenium-playground/");
