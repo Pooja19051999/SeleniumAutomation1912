@@ -37,7 +37,7 @@ public class TestNGSeleniumJava101_Chrome {
         ltOptions.put("name", "Assignment1");
         ltOptions.put("w3c", true);
         ltOptions.put("plugin", "java-testNG");
-        browserOptions.setCapability("LT:Options", ltOptions);
+        browserOptions.setCapability("LT:Options", ltOptions)
 
 
 
