@@ -30,7 +30,7 @@ public class TestNGSeleniumJava101_Chrome {
         options.setCapability("browserName", "Chrome");
         options.setCapability("browserVersion", "128.0");
         options.setCapability("platformName", "Windows 10");
-        options.addArguments("--headless"); // Runs without a GUI
+        options.addArguments("--headless=new"); // Runs without a GUI
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--window-size=1920,1080");
