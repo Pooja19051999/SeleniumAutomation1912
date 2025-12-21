@@ -1,5 +1,6 @@
 package org.example;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,14 +22,18 @@ import java.util.HashMap;
 
 public class TestNGSeleniumJava101_Chrome {
 
+
+
     private WebDriverWait wait;
     private WebDriver driver;
+
 
     @BeforeMethod
     public void setup() throws MalformedURLException {
         ChromeOptions browserOptions = new ChromeOptions();
         browserOptions.setPlatformName("Windows 10");
-        browserOptions.setBrowserVersion("dev");
+        browserOptions.setBrowserVersion("128.0");
+        browserOptions.addArguments("--headless=new");
         HashMap<String, Object> ltOptions = new HashMap<String, Object>();
         ltOptions.put("username", "poojagaydhani");
         ltOptions.put("accessKey", "LT_tbkX5LXDwgRxTaSpkc0Q57IWwV22UDmvRs0nei2mFYHEvqE");
@@ -41,7 +46,7 @@ public class TestNGSeleniumJava101_Chrome {
 
 
 
-        driver = new RemoteWebDriver(new URL("http://poojagaydhani:tbkX5LXDwgRxTaSpkc0Q57IWwV22UDmvRs0nei2mFYHEvqE@hub.lambdatest.com/wd/hub"), browserOptions);
+        driver = new RemoteWebDriver(new URL("https://poojagaydhani:LT_tbkX5LXDwgRxTaSpkc0Q57IWwV22UDmvRs0nei2mFYHEvqE@hub.lambdatest.com/wd/hub"), browserOptions);
 
 
         driver.get("https://www.lambdatest.com/selenium-playground/");
