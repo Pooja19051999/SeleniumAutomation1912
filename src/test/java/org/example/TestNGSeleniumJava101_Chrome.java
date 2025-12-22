@@ -15,6 +15,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
@@ -29,7 +31,7 @@ public class TestNGSeleniumJava101_Chrome {
 
 
     @BeforeMethod
-    public void setup() throws MalformedURLException {
+    public void setup() throws IOException {
         ChromeOptions browserOptions = new ChromeOptions();
         browserOptions.setPlatformName("Windows 10");
         browserOptions.setBrowserVersion("128.0");
@@ -45,10 +47,13 @@ public class TestNGSeleniumJava101_Chrome {
         browserOptions.setCapability("LT:Options", ltOptions);
 
 
-
-        driver = new RemoteWebDriver(new URL("https://poojagaydhani:LT_tbkX5LXDwgRxTaSpkc0Q57IWwV22UDmvRs0nei2mFYHEvqE@hub.lambdatest.com/wd/hub"), browserOptions);
-
-
+        try {
+            driver = new RemoteWebDriver(new URL("https://poojagaydhani:LT_tbkX5LXDwgRxTaSpkc0Q57IWwV22UDmvRs0nei2mFYHEvqE@hub.lambdatest.com/wd/hub"), browserOptions);
+        }
+        catch (Exception e) {
+            String pageSource = driver.getPageSource();
+            FileWriter writer = new FileWriter("dom_snapshot.html");
+            writer.write(pageSource); writer.close(); throw e;  }
         driver.get("https://www.lambdatest.com/selenium-playground/");
         wait = new WebDriverWait(driver, Duration.ofSeconds(20)); // Explicit wait setup
     }
@@ -62,7 +67,7 @@ public class TestNGSeleniumJava101_Chrome {
 
         // SoftAssert for validating the Page Title
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(driver.getTitle(), "Selenium Grid Online", "Page title is incorrect!");
+        softAssert.assertEquals(driver.getTitle(), "Selenium Grid Online | Run Selenium Test On Cloud", "Page title is incorrect!");
 
         // Following statements will still execute even if the assertion fails
         System.out.println("This statement executes after soft assert.");
