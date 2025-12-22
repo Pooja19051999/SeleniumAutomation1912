@@ -7,11 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -29,26 +31,30 @@ public class TestNGSeleniumJava101_Chrome {
     private WebDriverWait wait;
     private WebDriver driver;
 
+    @Parameters({"browser", "version", "platform"})
 
     @BeforeMethod
-    public void setup() throws IOException {
-        ChromeOptions browserOptions = new ChromeOptions();
-        browserOptions.setPlatformName("Windows 10");
-        browserOptions.setBrowserVersion("128.0");
-        browserOptions.addArguments("--headless=new");
+    public void setup(String browser, String version, String platform) throws IOException {
+        String username = System.getenv("LT_USERNAME");
+        String accessKey = System.getenv("LT_ACCESS_KEY");
+        String hubURL = "https://" + username + ":" + accessKey + "@hub.lambdatest.com/wd/hub";
+
+        DesiredCapabilities browserOptions = new DesiredCapabilities();
+        browserOptions.setCapability("browserName", browser);
+        browserOptions.setCapability("browserVersion", version);
+        browserOptions.setCapability("platformName", platform);
+
         HashMap<String, Object> ltOptions = new HashMap<String, Object>();
-        ltOptions.put("username", "poojagaydhani");
-        ltOptions.put("accessKey", "LT_tbkX5LXDwgRxTaSpkc0Q57IWwV22UDmvRs0nei2mFYHEvqE");
-        ltOptions.put("build", "TestNG Assignment");
+        ltOptions.put("build", "TestNG Parallel Build");
+        ltOptions.put("name", browser + "_" + platform + "_Test");
         ltOptions.put("project", "SeleniumAutomation1912");
-        ltOptions.put("name", "Assignment1");
         ltOptions.put("w3c", true);
         ltOptions.put("plugin", "java-testNG");
         browserOptions.setCapability("LT:Options", ltOptions);
 
 
-            driver = new RemoteWebDriver(new URL("https://poojagaydhani:LT_tbkX5LXDwgRxTaSpkc0Q57IWwV22UDmvRs0nei2mFYHEvqE@hub.lambdatest.com/wd/hub"), browserOptions);
-            driver.get("https://www.lambdatest.com/selenium-playground/");
+        driver = new RemoteWebDriver(new URL(hubURL), browserOptions);
+        driver.get("https://www.lambdatest.com/selenium-playground/");
             wait = new WebDriverWait(driver, Duration.ofSeconds(20)); // Explicit wait setup
 
 

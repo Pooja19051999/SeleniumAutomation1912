@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Lambda Test Suite" parallel="tests" thread-count="3">
+    <test name="Chrome_Win11" verbose="2" preserve-order="true">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="version" value="128.0"/>
+        <parameter name="platform" value="Windows 10"/>
+        <classes>
+            <class name="org.example.TestNGSeleniumJava101_Chrome">
+                <methods>
+                    <include name="testScenario1"/>
+                    <include name="testScenario2"/>
+                    <include name="testScenario3"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Microsoft_edge" verbose="2" preserve-order="true">
+        <parameter name="browser" value="MicrosoftEdge"/>
+        <parameter name="version" value="127.0"/>
+        <parameter name="platform" value="macOS Ventura"/>
+        <classes>
+            <class name="org.example.TestNGSeleniumJava101_Chrome">
+                <methods>
+                    <include name="testScenario1"/>
+                    <include name="testScenario2"/>
+                    <include name="testScenario3"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="FireFox" verbose="2" preserve-order="true">
+        <parameter name="browser" value="Firefox"/>
+        <parameter name="version" value="130.0"/>
+        <parameter name="platform" value="Windows 11"/>
+        <classes>
+            <class name="org.example.TestNGSeleniumJava101_Chrome">
+                <methods>
+                    <include name="testScenario1"/>
+                    <include name="testScenario2"/>
+                    <include name="testScenario3"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Internet_Explorer " verbose="2" preserve-order="true">
+        <parameter name="browser" value="Firefox"/>
+        <parameter name="version" value="11.0"/>
+        <parameter name="platform" value="Windows 10"/>
+        <classes>
+            <class name="org.example.TestNGSeleniumJava101_Chrome">
+                <methods>
+                    <include name="testScenario1"/>
+                    <include name="testScenario2"/>
+                    <include name="testScenario3"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
