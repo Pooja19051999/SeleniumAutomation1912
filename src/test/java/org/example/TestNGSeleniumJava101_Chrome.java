@@ -47,22 +47,12 @@ public class TestNGSeleniumJava101_Chrome {
         browserOptions.setCapability("LT:Options", ltOptions);
 
 
-        try {
             driver = new RemoteWebDriver(new URL("https://poojagaydhani:LT_tbkX5LXDwgRxTaSpkc0Q57IWwV22UDmvRs0nei2mFYHEvqE@hub.lambdatest.com/wd/hub"), browserOptions);
             driver.get("https://www.lambdatest.com/selenium-playground/");
             wait = new WebDriverWait(driver, Duration.ofSeconds(20)); // Explicit wait setup
 
 
         }
-
-        catch (Exception e) {
-            String pageSource = driver.getPageSource();
-            FileWriter writer = new FileWriter("dom_snapshot.html");
-            writer.write(pageSource);
-            writer.close();
-            throw e;
-        }
-    }
 
     @Test(priority = 0)
     public void testScenario1() throws InterruptedException {
@@ -130,8 +120,10 @@ Thread.sleep(3000);
     }
 
     @AfterMethod
-    public void tearDown() {
-        driver.quit();
-    }
+    public void tearDown() throws Exception
+    { if (driver != null) {
+        try (FileWriter writer = new FileWriter("dom_snapshot.html"))
+        { writer.write(driver.getPageSource()); } driver.quit();
+    } }
 
 }
